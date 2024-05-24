@@ -6,7 +6,7 @@ const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
-const API_KEY = "sk-proj-5rGB9NQa6fHYxXoFL3ZfT3BlbkFJHOdSYuAEsEtC5q3x2Vxy"; // Paste your API key here
+const API_KEY = "sk-proj-XxMP5gMfMOLq87hm5gkdT3BlbkFJ8faz73xwTWzRKSIM2qh3";
 const inputInitHeight = chatInput.scrollHeight;
 
 const createChatLi = (message, className) => {
@@ -40,25 +40,25 @@ const generateResponse = (chatElement) => {
   };
 
   // Send POST request to API, get response and set the reponse as paragraph text
-fetch(API_URL, requestOptions)
-  .then((res) => res.json())
-  .then((data) => {
-    const customInstructions = {
-      // Add your custom instructions here
-      // For example:
-      instructions:
-        "You are a helpful personal Finance Expert. You work for Nicolette Mashile",
-    };
-    data.parameters = customInstructions;
-    messageElement.textContent = data.choices[0].message.content.trim();
-  })
-  .catch((error) => {
-    console.log("FAILED..." + error);
-    messageElement.classList.add("error");
-    messageElement.textContent =
-      "Oops! Something went wrong. Please try again.";
-  })
-  .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+  fetch(API_URL, requestOptions)
+    .then((res) => res.json())
+    .then((data) => {
+      const customInstructions = {
+        // Add your custom instructions here
+        // For example:
+        instructions:
+          "You are a helpful personal Finance Expert. You work for Nicolette Mashile",
+      };
+      data.parameters = customInstructions;
+      messageElement.textContent = data.choices[0].message.content.trim();
+    })
+    .catch((error) => {
+      console.log("FAILED..." + error);
+      messageElement.classList.add("error");
+      messageElement.textContent =
+        "Oops! Something went wrong. Please try again.";
+    })
+    .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
 };
 
 const handleChat = () => {
