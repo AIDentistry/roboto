@@ -5,15 +5,6 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Fonts Link For Icons -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
-    />
     <link
       rel="stylesheet"
       href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"
@@ -21,8 +12,9 @@
     <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 
     <df-messenger
-  project-id="nicolette-mashile-424119"
-  agent-id="0d00dbbe-7db6-471f-9dc8-baafd7753cfd"
+      intent="custom.event"
+      project-id="nicolette-mashile-424119"
+      agent-id="0d00dbbe-7db6-471f-9dc8-baafd7753cfd"
       language-code="en"
       max-query-length="-1"
     >
@@ -65,6 +57,10 @@
         --df-messenger-titlebar-font-color: white;
         --df-messenger-titlebar-subtitle-font-color: white;
         --df-messenger-titlebar-title-font-size: 16px;
+        --df-messenger-chat-scroll-button-font-color: white;
+        --df-messenger-chat-scroll-button-background: #7c9d46;
+        --df-messenger-send-icon-color: #7c9d46;
+        --df-messenger-input-box-focus-border: black;
 
         bottom: 16px;
         right: 16px;
@@ -78,6 +74,10 @@
         --df-messenger-message-user-font-color: white;
         --df-messenger-message-bot-font-color: black;
         --df-messenger-focus-color: black;
+      }
+
+      df-messenger-message-container {
+        flex-direction: column-reverse;
       }
     </style>
   </head>
