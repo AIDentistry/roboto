@@ -11,6 +11,13 @@
     />
     <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 
+    <div class="greeting-popup">Hi there, I can help you!</div>
+    <audio
+      id="chime-sound"
+      src="./assets/message-notification.mp3"
+      preload="auto"
+    ></audio>
+
     <df-messenger
       intent="custom.event"
       project-id="nicolette-mashile-424119"
@@ -22,6 +29,7 @@
         chat-title="Financial Bunny AI"
         chat-title-icon="./assets/nicolette_image.png"
         bot-actor-image=""
+        bot-writing-text="Thinking..."
         chat-subtitle="online"
         allow-fullscreen="small"
         chat-collapse-icon="./assets/down_arrow.svg"
@@ -31,7 +39,9 @@
     </df-messenger>
 
     <style>
+
       df-messenger {
+        
         z-index: 999;
         position: fixed;
         --df-messenger-font-color: #000;
@@ -42,7 +52,7 @@
           #7c9d46,
           #445e1e
         );
-        --df-messenger-button-titlebar-color: #8fa512;
+        --df-messenger-button-titlebar-color: #7c9d46;
         --df-messenger-message-bot-background: #e5e5ea;
         --df-messenger-send-icon: #b8187b;
         --df-messenger-primary-color: #7c9d46;
@@ -53,34 +63,77 @@
           #7c9d46,
           #445e1e
         );
+
         --df-messenger-titlebar-title-font-weight: 700;
         --df-messenger-titlebar-font-color: white;
         --df-messenger-titlebar-subtitle-font-color: white;
         --df-messenger-titlebar-title-font-size: 16px;
         --df-messenger-chat-scroll-button-font-color: white;
         --df-messenger-chat-scroll-button-background: #7c9d46;
-        --df-messenger-send-icon-color: #7c9d46;
+        --df-messenger-send-icon-color: #445e1e;
         --df-messenger-input-box-focus-border: black;
-
         bottom: 16px;
         right: 16px;
+
+        --df-messenger-chat-window-height: 500px;
       }
 
       df-messenger-chat-bubble {
         --df-messenger-chat-window-offset: 8px;
         --df-messenger-chat-bubble-icon-size: 32px;
         --df-messenger-chat-bubble-icon-color: white;
-        --df-messenger-chat-bubble-background: #7c9d46;
+        --df-messenger-chat-bubble-background: #445e1e;
         --df-messenger-message-user-font-color: white;
         --df-messenger-message-bot-font-color: black;
         --df-messenger-chat-collapse-icon-size: 16px;
         --df-messenger-focus-color: black;
       }
 
-      df-messenger-message-container {
-        flex-direction: column-reverse;
+      .greeting-popup {
+        position: fixed;
+        bottom: 90px; /* position above the chat button */
+        right: 16px; /* align with the chat button */
+        background: linear-gradient(
+          to right,
+          #7c9d46,
+          #445e1e
+        );
+        color: white; /* set text color to white */
+        
+        padding: 8px 16px; /* adjust padding to provide space around the text */
+        font-size: 12px;
+        z-index: 1000; /* ensure it's on top of the chat button */
+        display: none; /* hide by default */
+        border-radius: 14px; /* make the border radius half of the height for rounded ends */
+        text-align: center; /* center-align the text inside */
+        line-height: normal; /* reset line height to normal */
       }
     </style>
+
+    <script>
+      window.onload = function () {
+        setTimeout(function () {
+          // Check if the chatbot is not open
+          const chatWindow = document.querySelector('df-messenger');
+          const isChatOpen = chatWindow.hasAttribute('opened');
+
+          // console.log(isChatOpen);
+
+          if (!isChatOpen) {
+            document.querySelector(".greeting-popup").style.display = "block";
+            var audio = document.getElementById("chime-sound");
+            audio.play().catch(error => {
+              console.error('Error playing audio:', error);
+            });
+          }
+        }, 5000); // 5000 milliseconds = 5 seconds
+
+        const chatButton = document.querySelector("df-messenger");
+        chatButton.addEventListener("click", function () {
+          document.querySelector(".greeting-popup").style.display = "none";
+        });
+      };
+    </script>
   </head>
   <body></body>
 </html>
